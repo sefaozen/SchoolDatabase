@@ -1,56 +1,80 @@
-/**
- * Created by Sefa on 21.2.2016.
- */
-public class Administrator implements Person {
+import java.util.ArrayList;
+import java.util.List;
 
-    private String userName;
-    private String password;
-    private String whoIAm;
+public class Administrator extends User{
+
+
+
+
+    private List<Person> userList;
 
     public Administrator(String name,String pass)
     {
-        userName=name;
-        password=pass;
-        whoIAm="administrator";
+        super(name,pass);
+
+        userList=new ArrayList<Person>();
+
+    }
+
+
+    public List<Person> GetUserList()
+    {
+        return userList;
     }
 
     /**
-     * Take a string and change username
-     * @param other is a string parameter for change username
+     * For add user. Only admin can add
+     * @param person which is for looking admin or not
+     * @param add  course object which will add
+     * @return if it is added , it's return true
      */
-    public void SetUsername(String other) {
+    public boolean AddUser(Person person, Person add)
+    {
+        if(person instanceof Administrator)
+        {
 
-        userName=other;
+            for(int i=0; i < userList.size() ; i++)
+            {
+                if(userList.get(i).GetUsername() != add.GetUsername())
+                {
+
+                    return false;
+                }
+            }
+            userList.add(add);
+            return true;
+        }
+        else
+            return false;
+
     }
 
     /**
-     * Take a string and change password
-     * @param other is a string parameter for change password
+     * For add course. Only admin can remove
+     * @param person which is for looking admin or not
+     * @param add  course object which will remove
+     * @return if it is removed , it's return true
      */
-    public void SetPassword(String other) {
+    public boolean RemoveUser(Person person, Person add)
+    {
+        if(person instanceof Administrator)
+        {
+            for(int i=0; i < userList.size() ; i++)
+            {
+                if(userList.get(i).GetUsername()== add.GetUsername())
+                {
+                    userList.remove(i);
+                    return true;
+                }
 
-        password=other;
+            }
+            return false;
+        }
+        else
+            return false;
+
     }
 
-    /**
-     * Get the password
-     * @return String which is password
-     */
-    public String GetPassword() {
-        return password;
-    }
-    /**
-     * Get the userName
-     * @return String which is userName
-     */
-    public String GetUsername() {
-        return userName;
-    }
-    /**
-     * Get the whoIAm
-     * @return String which is whoIAm
-     */
-    public String GetWhoIAm() {
-        return whoIAm;
-    }
+
+
 }
