@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Sefa on 21.2.2016.
- */
+
 public class Main {
 
 
@@ -15,11 +13,12 @@ public class Main {
 
         Course course=new Course();
 
-        user.add(admin);
+        admin.AddUser(admin,te);
         course.AddCourse(admin,new Course("Data","CSE 222",2016));
         course.RemoveCourse(te,new Course("Data","CSE 222",2016));
+        course.ViewCurrentCourse(te);
 
-        System.out.println("Asdas"+course. );
+        //System.out.println("Asdas"+course.GetCourseList().get(0).toString() );
 
 
 
